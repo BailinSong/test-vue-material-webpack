@@ -14,10 +14,10 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "iview": "^2.13.1",
     "vue": "^2.5.2",
-    "vue-material": "^1.0.0-beta-8",
-    "vue-router": "^3.0.1",
-    "vue-resource": "latest"
+    "vue-resource": "latest",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -62,7 +62,6 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.31",
     "karma-webpack": "^2.0.2",
-    "material-ui-vue": "^0.1.6",
     "mocha": "^3.2.0",
     "nightwatch": "^0.9.12",
     "node-notifier": "^5.1.2",

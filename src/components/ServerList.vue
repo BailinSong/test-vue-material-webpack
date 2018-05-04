@@ -62,7 +62,6 @@
         console.log(this.form);
         this.$http.post('http://localhost:1049/servers',this.form).then(response => {
           console.log(response.data);
-          clearForm()
           // get body data
           // this.someData = response.body;
 
