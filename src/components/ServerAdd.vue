@@ -53,11 +53,9 @@
       },
       saveUser() {
         console.log(this.form);
-<<<<<<< HEAD
-        this.$http.post('http://localhost:1049/servers',this.form).then(response => {
-=======
+
         this.$http.post(config.API_URL + '/servers', this.form, {emulateJSON: true}).then(response => {
->>>>>>> 更新进度
+
           console.log(response.data);
           clearForm()
           // get body data
