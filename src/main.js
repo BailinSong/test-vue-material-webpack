@@ -3,14 +3,17 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import VueMaterial from 'vue-material'
 import VueResource from 'vue-resource'
-import 'vue-material/dist/vue-material.min.css'
-import 'vue-material/dist/theme/default.css'
+import iView from 'iview'
+import 'iview/dist/styles/iview.css'
+import Validator from 'vue-validator'
+import validate from 'validate'
 
 Vue.config.productionTip = false;
-Vue.use(VueMaterial);
 Vue.use(VueResource);
+Vue.use(Validator)
+Vue.use(validate)
+Vue.use(iView)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

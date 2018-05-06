@@ -1,66 +1,63 @@
 <template>
-  <div>
-    <form novalidate class="md-layout md-gutter" @submit.prevent="saveUser">
-
-      <div class="md-layout-item">
-        <md-field>
-          <label for="alias">规则名称</label>
-          <md-input name="alias" id="alias" v-model="form.alias"/>
-        </md-field>
-      </div>
-      <div class="md-layout-item">
-        <md-field>
-          <label for="localPort">本地端口</label>
-          <md-input name="localPort" id="localPort" v-model="form.localPort"/>
-        </md-field>
-      </div>
-      <div class="md-layout-item">
-        <md-field>
-          <label for="remoteHost">远端主机</label>
-          <md-input name="remoteHost" id="remoteHost" v-model="form.remoteHost"/>
-        </md-field>
-      </div>
-      <div class="md-layout-item">
-        <md-field>
-          <label for="remotePort">远端端口</label>
-          <md-input name="remotePort" id="remotePort" v-model="form.remotePort"/>
-        </md-field>
-      </div>
-      <div class="md-layout-item">
-        <md-button type="submit" class="md-raised md-primary">创建规则</md-button>
-      </div>
-    </form>
-  </div>
+  <Form inline>
+    <FormItem>
+      <Input type="text" v-model="formInline.user" placeholder="Username">
+      <Icon type="ios-person-outline" slot="prepend"/>
+      </Input>
+    </FormItem>
+    <FormItem prop="password">
+      <Input type="password" v-model="formInline.password" placeholder="Password">
+      <Icon type="ios-locked-outline" slot="prepend"/>
+      </Input>
+    </FormItem>
+    <FormItem>
+      <Button type="primary" @click="handleSubmit('formInline')">Signin</Button>
+    </FormItem>
+  </Form>
 </template>
 
 <script>
   import {validationMixin} from 'vuelidate'
-  import {email, maxLength, minLength, required} from 'vuelidate/lib/validators'
+  import {Input} from 'vuelidate/lib/validators'
+  import * as config from '../util/config'
 
   export default {
     name: 'ServerAdd',
     mixins: [validationMixin],
-    data: () => ({
-      form: {
-        alias: null,
-        localPort: null,
-        remotePort: null,
-        remoteHost: null
+    data () {
+      return {
+        formInline: {
+          user: '',
+          password: ''
+        },
+        ruleInline: {
+          user: [
+            { required: true, message: 'Please fill in the user name', trigger: 'blur' }
+          ],
+          password: [
+            { required: true, message: 'Please fill in the password.', trigger: 'blur' },
+            { type: 'string', min: 6, message: 'The password length cannot be less than 6 bits', trigger: 'blur' }
+          ]
+        }
       }
-    }),
+    },
 
-    methods: {
-
-      clearForm() {
-        this.$v.$reset()
-        this.form.alias = null
-        this.form.localPort = null
-        this.form.remotePort = null
-        this.form.remoteHost = null
+    methods: {handleSubmit(name) {
+        this.$refs[name].validate((valid) => {
+          if (valid) {
+            this.$Message.success('Success!');
+          } else {
+            this.$Message.error('Fail!');
+          }
+        })
       },
       saveUser() {
         console.log(this.form);
+<<<<<<< HEAD
         this.$http.post('http://localhost:1049/servers',this.form).then(response => {
+=======
+        this.$http.post(config.API_URL + '/servers', this.form, {emulateJSON: true}).then(response => {
+>>>>>>> 更新进度
           console.log(response.data);
           clearForm()
           // get body data
